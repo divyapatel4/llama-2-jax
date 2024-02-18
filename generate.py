@@ -28,8 +28,7 @@ def main():
     # for i in len(devices):
     #     print(devices[i] + "   ", devices[i+1])
     for i in range(len(devices), 2):
-        print(devices[i] + "   ", devices[i+1])
-
+        print(devices[i], devices[i+1])
     print('Total TPUs available:', jax.device_count())
     # params = load_params_from_disk()
     # print('Successfully loaded model parameters!')
