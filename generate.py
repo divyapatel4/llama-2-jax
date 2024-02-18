@@ -22,7 +22,7 @@ def main():
     top_k = 6
     # top_p = 0.05
     max_len = 256
-
+    print('Available devices:', jax.devices())
     params = load_params_from_disk()
     print('Successfully loaded model parameters!')
 
