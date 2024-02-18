@@ -24,9 +24,14 @@ def main():
     max_len = 256
     print('Available devices:')
     devices = jax.devices()
+    i = 0
     for device in devices:
-        print(device, device.device_kind)
-        
+        if i%2 == 0:
+            print(device , end = '    ')
+        else:
+            print(device)
+        i += 1
+
     print('Total TPUs available:', jax.device_count())
     # params = load_params_from_disk()
     # print('Successfully loaded model parameters!')
