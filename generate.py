@@ -33,35 +33,35 @@ def main():
         i += 1
 
     print('Total TPUs available:', jax.device_count())
-    # params = load_params_from_disk()
-    # print('Successfully loaded model parameters!')
+    params = load_params_from_disk()
+    print('Successfully loaded model parameters!')
 
-    # key = rand.key(BEST_INTEGER, impl='rbg')
-    # tokenizer = LlamaTokenizer.from_pretrained('meta-llama/Llama-2-70b-chat-hf', padding_side='left')
-    # tokenizer.pad_token = tokenizer.eos_token
+    key = rand.key(BEST_INTEGER, impl='rbg')
+    tokenizer = LlamaTokenizer.from_pretrained('meta-llama/Llama-2-70b-chat-hf', padding_side='left')
+    tokenizer.pad_token = tokenizer.eos_token
 
-    # logits_processor = make_logits_processor(
-    #     PresencePenaltyProcessor(penalty=0.05),
-    #     TopKSampler(top_k=top_k),
-    #     # TopPSampler(top_p=top_p),
-    # )
+    logits_processor = make_logits_processor(
+        PresencePenaltyProcessor(penalty=0.05),
+        TopKSampler(top_k=top_k),
+        # TopPSampler(top_p=top_p),
+    )
 
-    # batched_sentences = [
-    #     [
-    #         'Four score and seven years ago our fathers',
-    #         'Marta is a Syriac student. Aday asks her: ‘Why do you want to learn Surayt?’',
-    #     ],
-    #     [
-    #         'Marta is a Syriac student. Aday asks her: ‘Why do you want to learn Surayt?’',
-    #         'Four score and seven years ago our fathers',
-    #     ]
-    # ]
+    batched_sentences = [
+        [
+            'Four score and seven years ago our fathers',
+            'Marta is a Syriac student. Aday asks her: ‘Why do you want to learn Surayt?’',
+        ],
+        [
+            'Marta is a Syriac student. Aday asks her: ‘Why do you want to learn Surayt?’',
+            'Four score and seven years ago our fathers',
+        ]
+    ]
 
-    # for sentences in batched_sentences:
-    #     key, subkey = rand.split(key)
-    #     generated_sentences = generate(sentences, tokenizer, params, logits_processor, max_len=max_len, key=subkey)
-    #     for sentence in generated_sentences:
-    #         print(sentence, end='\n\n')
+    for sentences in batched_sentences:
+        key, subkey = rand.split(key)
+        generated_sentences = generate(sentences, tokenizer, params, logits_processor, max_len=max_len, key=subkey)
+        for sentence in generated_sentences:
+            print(sentence, end='\n\n')
 
 if __name__ == '__main__':
     main()
